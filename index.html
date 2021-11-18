@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs–– -->
+  <meta charset="utf-8">
+  <title>Your Project Title</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/customize.css">
+  <style>
+  #map_1,#map_2,#map_3 {
+    height: 500px;
+  }
+  </style>
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <div class="container one-bottom" style="margin-top: 50px">
+    <div class="ten columns">
+      <h2>Connective Environments, Fall 2021</h2>
+      <p>
+        ARCH4050/6306: Tuesdays 2pm-5:15pm
+        <br>
+        Dr. Dimitris Papanikolaou | dpapanik@uncc.edu | Urban Synergetics Lab | https://urbansynergeticslab.net
+      </p>
+    </div>
+    <div class="two columns">
+      <a href="https://urbansynergeticslab.net/"><img class="scale-with-grid" src="img/LabLogo_dark_cropped.png"></a>
+    </div>
+  </div>
+  
+
+  <div class="container one-bottom" style="margin-top: 50px">
+    <div class="twelve columns">
+      <h3>DIARY ENTRY 11.9.2021</h3>
+      <p align="justify">From last week, we decided to shift from trying to simplify the way we were trying to achieve the effect of the inflatables pushing against each other. We decided to further investigate the relationship between forms that push against each other while still hoping that people will attempt to go through the exhibit. We constructed a framed box to allow for the inflatables to hang and to fill the space horizontally instead of vertically when inflated. Some challenges we saw from construction that we hope to address as we move forward, air intake, there will be issues of space needed to fans to inflate. This could be fixed by having the fans be on top of the frame, also lowering the risk of the air tube being dislodged. This does multiply the issue of weight on the frame. Another issue that continues from our previous iterations, inflatables needing to be sized appropriately to let the inflatables interact with each other. This iterations only had two inflatables due to material limitations, but this can be talked about more in the construction process. We decide to construct this model with 7 pieces of 2"x2"x8' lumber because it was cheaper than buying a smaller profile lumber. We had the wood cut at Lowes because it's hard to transport wood in a sedan. I transported the lumber to the university via public transportation with a particularly long sling and a carabiner. I created the box by creating two square forms, then connecting the two squares with four pieces to create a box. For the inflatables, I created two 3’x5’ pillows with a reinforced air entrance at the bottom, a sheath was attached at the top to connect it to the wood suspending it. Upon testing, we believe that we still require to test how many inflatables we will need for fill a space, and that we will require a location with sides for the inflatables to press against. There is a worry in blocking fire exits in our building we have a several options that could work with the criteria within the context of our project. A. hallway, but big time fire exit, but would be funny to make professor’s lives slightly more inconvenient, but also might not have someone near it to adapt the space. B. Path from Saloon to Fab Lab, it very wide and would take more work and fabrication to create and install. The benefit of this site is how often it is used. C. At the end of the saloon, between the side of the wall and the stairs. This has a benefit of not feeling like a major fire exit, but it might now have large traffic flow. D. The balcony of the second floor lobby, its not a fire exit, it brings people to a space that I have never been in, but what happens in that space when people come there? It does have a nice view of the sunset. Notes from class. Do we want to focus on friction or spectator. If we focus on friction or threshold, there is the benefit using the structure to shape the project, reminiscent of Marina Abramović’s Naked Doorway. If we focus on spectoration of the project, it removes the issue of fire exits, but there might not be much pressure between the person experiencing the space except for the feeling of being touched rather than squeeze.</p>
+    </div>
+  </div>
+
+  <div class="container one-bottom">
+    <div class="row">
+      <img class="three columns scale-with-grid quarter-bottom-rel"src="img/frame_empty.JPG">
+      <img class="three columns scale-with-grid quarter-bottom-rel"src="img/20211116_123016.JPG">
+      <img class="three columns scale-with-grid quarter-bottom-rel" src="img/20211116_134218.JPG">
+      <img class="three columns scale-with-grid quarter-bottom-rel" src="img/20211116_134233.JPG">
+    </div>
+    <div class="row">
+      <img class="three columns scale-with-grid quarter-bottom-rel"src="img/20211116_134355.JPG">
+      <img class="three columns scale-with-grid quarter-bottom-rel"src="img/20211116_135739.JPG">
+    </div>
+  </div>
+
+
+  <script>
+
+  L.mapbox.accessToken = 'pk.eyJ1IjoiZGltcCIsImEiOiJkRnlra3RjIn0.E9CTYzNUEx0yb3dcfV4SiA';
+
+  var map_1 = L.mapbox.map('map_1')
+  .setView([40, -74.50], 9)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/dimp/citf6n01300692hmlxnnrv6wd'));
+  map_1
+  .scrollWheelZoom.disable();
+
+
+  d3.json("https://api.citybik.es/v2/networks/ford-gobike", function(data) {
+    console.log(data);
+
+    var map_2 = L.mapbox.map('map_2')
+    .setView([data.network.location.latitude, data.network.location.longitude], 10)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/dimp/citf6n01300692hmlxnnrv6wd'));
+    map_2
+    .scrollWheelZoom.disable();
+
+    data.network.stations.forEach(function(station){
+      station.lat = +station.latitude;
+      station.lng = +station.longitude;
+      var path_options = {
+        radius :  2,
+        color : d3.rgb(88,206,227).brighter(),
+        stroke: true,
+        weight : 1,
+      };
+      L.circleMarker([station.latitude, station.longitude], path_options).addTo(map_2);
+    });
+
+    var map_3 = L.mapbox.map('map_3')
+    .setView([data.network.location.latitude, data.network.location.longitude], 11)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/dimp/ck9mf0x8q3o521iojo2qmmp52'));
+    map_3
+    .scrollWheelZoom.disable();
+
+    data.network.stations.forEach(function(station){
+      station.lat = +station.latitude;
+      station.lng = +station.longitude;
+      var inventory_level = station.free_bikes / (station.free_bikes+station.empty_slots);
+      var path_options = {
+        radius :  0.14 * (station.free_bikes + station.empty_slots),
+        color : d3.rgb(88,206,227).brighter(),
+        fillColor : (function(){
+          return inventory_level > 0.5? d3.rgb(88,206,227) : d3.rgb(88,206,227).darker(2)
+        })(),
+        stroke: true,
+        weight : 1,
+        opacity : 1,
+        fillOpacity : 0.8
+      };
+      L.circleMarker([station.latitude, station.longitude], path_options).addTo(map_3);
+    });
+  });
+
+
+
+
+  </script>
+
+
+</body>
+</html>
